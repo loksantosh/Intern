@@ -24,10 +24,10 @@ const createIntern = async function (req, res) {
         }
 
         const { name, email, mobile, collegeName } = requestBody;
-        
+
         if (!isValid(name)) return res.status(400).send({ status: false, msg: "Name is required" })
         const validName = regName.test(intern.name)
-        if(validName == false) return res.status(400).send({ status: false, msg: "name must be in alphabet" })
+        if (validName == false) return res.status(400).send({ status: false, msg: "name must be in alphabet" })
 
         if (!isValid(email)) return res.status(400).send({ status: false, msg: "Email is required" })
 
@@ -58,15 +58,15 @@ const createIntern = async function (req, res) {
             return res.status(400).send({ status: false, msg: "College Name doesn't exist" })
         }
 
-        
+
         const allData = { name, email, mobile, collegeId }
-        
+
         const newData = await internModel.create(allData)
         return res.status(201).send({ status: true, msg: newData })
 
     } catch (error) {
-         res.status(500).send({ status: false, message: error.message });
-     }
+        res.status(500).send({ status: false, message: error.message });
+    }
 }
 
 

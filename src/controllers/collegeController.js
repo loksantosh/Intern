@@ -1,6 +1,5 @@
 const collegeModel = require('../model/collegeModel')
 const internModel = require('../model/internModel')
-// let regexName = new RegExp ('/^[A-Za-z]+$/')
 
 
 const isValidation = function (value) {
@@ -12,7 +11,6 @@ const isValidation = function (value) {
 const createCollege = async function (req, res) {
     try {
         let data = req.body
-        // let regexName = new RegExp ('/^[A-Z]+$/i')
         var regEx = /^[a-zA-Z]+$/;
 
 
@@ -24,26 +22,18 @@ const createCollege = async function (req, res) {
 
         if (!name) return res.status(400).send({ status: false, message: 'Name must be present' })
         if (!isValidation(name)) return res.status(400).send({ status: false, message: "Name should be valid" })
-
-        // const validName = regexName.test(name)
-        // if(validName == false) return res.status(400).send({ status: false, msg: "College name must be in alphabet" })
         if (!regEx.test(name)) {
             return res.status(400).send({ status: false, msg: "Name must be in alphabate" });
         }
 
         let SearchName = await collegeModel.findOne({ name: name })
         if (SearchName) return res.status(400).send({ status: false, msg: "Already exist" })
-        // console.log(SearchName)
-
 
         if (!fullName) return res.status(400).send({ status: false, message: 'fullname must be present' })
         if (!isValidation(fullName)) res.status(400).send({ status: false, message: 'fillName should be valid' })
         if (!regEx.test(fullName)) {
             return res.status(400).send({ status: false, msg: "Full Name must be in alphabate" });
         }
-        
-        // let SearchfullName = await collegeModel.findOne({fullName: fullName})
-        // if(SearchfullName) return res.status(400).send({ status: false, msg: `${fullName}  Already exist` })
 
         if (!logoLink) return res.status(400).send({ status: false, message: 'logoLink is required' })
         if (!isValidation(logoLink)) return res.status(400).send({ status: false, message: 'logolink must be present' })
