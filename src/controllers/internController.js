@@ -2,8 +2,7 @@ const collegeModel = require("../model/collegeModel")
 const internModel = require("../model/internModel")
 let regexMail = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
 let regexNumber = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/
-
-var regName = /^[a-zA-Z]+$/;
+var regexName = /^[a-zA-Z]+/;
 
 
 const isValid = function (value) {
@@ -19,7 +18,6 @@ const isValidRequestBody = function (requestBody) {
 const createIntern = async function (req, res) {
     try {
         const requestBody = req.body;
-        const intern = req.body
         if (!isValidRequestBody(requestBody)) {
             return res.status(400).send({ status: false, msg: "Please enter data" })
         }
@@ -27,12 +25,12 @@ const createIntern = async function (req, res) {
         const { name, email, mobile, collegeName } = requestBody;
 
         if (!isValid(name)) return res.status(400).send({ status: false, msg: "Name is required" })
-        const validName = regName.test(intern.name)
+        const validName = regexName.test(name)
         if (validName == false) return res.status(400).send({ status: false, msg: "name must be in alphabet" })
 
         if (!isValid(email)) return res.status(400).send({ status: false, msg: "Email is required" })
 
-        let checkMail = regexMail.test(intern.email)
+        let checkMail = regexMail.test(email)
         if (checkMail == false) return res.status(400).send({ status: false, msg: "email is not valid" })
 
         const emailAlraedyUsed = await internModel.findOne({ email: email })
@@ -42,7 +40,7 @@ const createIntern = async function (req, res) {
 
         if (!isValid(mobile)) return res.status(400).send({ status: false, msg: "Mobile Number is required" })
 
-        let checkMobileNo = regexNumber.test(intern.mobile)
+        let checkMobileNo = regexNumber.test(mobile)
         if (checkMobileNo == false) return res.status(400).send({ status: false, msg: "Mobile Number is not valid" })
 
         const mobileAlreadyUsed = await internModel.findOne({ mobile: mobile })
