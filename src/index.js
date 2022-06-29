@@ -1,7 +1,7 @@
 const express = require("express")
 const bodyParser = require("body-parser")
 const route =require("./routes/route")
-const mongoose =require("mongoose")
+const {default: mongoose} =require("mongoose")
 const app = express();
 
 app.use(bodyParser.json());
@@ -11,7 +11,7 @@ mongoose.connect("mongodb+srv://santosh:Santosh24@cluster0.xy0vu.mongodb.net/gro
     useNewUrlParser:true
 })
 
-.then( () => console.timeLog("MongoDb is Connected"))
+.then( () => console.log("MongoDb is Connected"))
 .catch(err=>console.log(err))
 
 

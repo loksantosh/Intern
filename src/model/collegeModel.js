@@ -7,16 +7,18 @@ const collegeSchema = new mongoose.Schema({
         unique: true,
         required: true,
         trim: true
+        //name lowercse or not- Ta se puchna hai
     },
     fullName: {
         type: String,
-        unique: true,
         required: true,
         trim: true
     },
-    logoLink: { requireed: true },
+    logoLink: { 
+        type: String,
+        required: true },
     isDeleted: {
-        type: boolean,
+        type: Boolean,
         default: false
     }
 

@@ -13,5 +13,14 @@
     "express": "^4.18.1",
     "mongoose": "^6.4.1",
     "nodemon": "^2.0.18"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loksantosh/Project2-intern.git"
+  },
+  "bugs": {
+    "url": "https://github.com/loksantosh/Project2-intern/issues"
+  },
+  "homepage": "https://github.com/loksantosh/Project2-intern#readme"
 }

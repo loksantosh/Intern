@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const ObjectId = mongoose.Schema.Types.ObjectId
 
 const internSchema = new mongoose.Schema(
     {
@@ -25,7 +26,7 @@ const internSchema = new mongoose.Schema(
             required: true
         },
         isDeleted: {
-            type: boolean,
+            type: Boolean,
             default: false
         }
 
