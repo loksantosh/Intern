@@ -11,7 +11,7 @@ const isValidation = function (value) {
 const createCollege = async function (req, res) {
     try {
         let data = req.body
-        var regEx = /^[a-zA-Z]+$/;
+        var regEx = /^[a-zA-Z]+/;
 
 
         const { name, fullName, logoLink } = data
@@ -32,7 +32,7 @@ const createCollege = async function (req, res) {
         if (!fullName) return res.status(400).send({ status: false, message: 'fullname must be present' })
         if (!isValidation(fullName)) res.status(400).send({ status: false, message: 'fillName should be valid' })
         if (!regEx.test(fullName)) {
-            return res.status(400).send({ status: false, msg: "Full Name must be in alphabate" });
+            return res.status(400).send({ status: false, msg: "Full Name must be in alphabate" }); //last main no dene se nehi aa raha hai
         }
 
         if (!logoLink) return res.status(400).send({ status: false, message: 'logoLink is required' })

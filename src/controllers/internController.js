@@ -1,7 +1,8 @@
 const collegeModel = require("../model/collegeModel")
 const internModel = require("../model/internModel")
 let regexMail = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
-let regexNumber = new RegExp('[0-9]{10}');
+let regexNumber = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/
+
 var regName = /^[a-zA-Z]+$/;
 
 
@@ -53,6 +54,8 @@ const createIntern = async function (req, res) {
 
 
         const college = await collegeModel.findOne({ name: collegeName })
+        if (!college) return res.status(400).send({ status: false, msg: "enter a valid college name" })
+
         const collegeId = college._id
         if (!collegeId) {
             return res.status(400).send({ status: false, msg: "College Name doesn't exist" })
