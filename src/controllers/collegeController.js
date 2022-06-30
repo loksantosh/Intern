@@ -11,7 +11,7 @@ const isValidation = function (value) {
 const createCollege = async function (req, res) {
     try {
         let data = req.body
-        var regEx = /^[a-zA-Z]+/;
+        var regEx = /^[a-zA-Z ]*$/;
 
 
         const { name, fullName, logoLink } = data
@@ -32,7 +32,7 @@ const createCollege = async function (req, res) {
         if (!fullName) return res.status(400).send({ status: false, message: 'fullname must be present' })
         if (!isValidation(fullName)) res.status(400).send({ status: false, message: 'fullName should be valid' })
         if (!regEx.test(fullName)) {
-            return res.status(400).send({ status: false, msg: "Full Name must be in alphabate" }); //last main no dene se nehi aa raha hai
+            return res.status(400).send({ status: false, msg: "Full Name must be in alphabate" });
         }
 
         if (!logoLink) return res.status(400).send({ status: false, message: 'logoLink is required' })
@@ -62,8 +62,8 @@ const collegeDetails = async (req, res) => {
         if (!collegeDetails) return res.status(404).send({ status: false, msg: "College doesn't exist" })
         let interns = await internModel.find({ collegeId: collegeDetails._id }).select({ name: 1, email: 1, mobile: 1 })
 
-        if (interns.length === 0)
-            interns = "No Intern found"
+        // if (interns.length === 0)
+        //     interns = "No Intern found"
 
         let data = { name: collegeDetails.name, fullName: collegeDetails.fullName, logoLink: collegeDetails.logoLink, interns: interns }
         res.status(200).send({ status: true, data: data })
