@@ -30,7 +30,7 @@ const createCollege = async function (req, res) {
         if (SearchName) return res.status(400).send({ status: false, msg: "Already exist" })
 
         if (!fullName) return res.status(400).send({ status: false, message: 'fullname must be present' })
-        if (!isValidation(fullName)) res.status(400).send({ status: false, message: 'fillName should be valid' })
+        if (!isValidation(fullName)) res.status(400).send({ status: false, message: 'fullName should be valid' })
         if (!regEx.test(fullName)) {
             return res.status(400).send({ status: false, msg: "Full Name must be in alphabate" }); //last main no dene se nehi aa raha hai
         }
