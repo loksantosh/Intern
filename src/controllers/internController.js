@@ -34,9 +34,9 @@ const createIntern = async function (req, res) {
         let checkMail = regexMail.test(email)
         if (!checkMail) return res.status(400).send({ status: false, msg: "email is not valid" })
 
-        const emailAlraedyUsed = await internModel.findOne({ email })
-        if (emailAlraedyUsed) {
-            return res.status(400).send({ status: false, msg: "Email already used" })
+        const emailAlreadyUsed = await internModel.findOne({ email: email })
+        if (emailAlreadyUsed) {
+            return res.status(409).send({ status: false, msg: "Email already used" })
         }
 
         if (!isValid(mobile)) return res.status(400).send({ status: false, msg: "Mobile Number is required" })
@@ -46,7 +46,7 @@ const createIntern = async function (req, res) {
 
         const mobileAlreadyUsed = await internModel.findOne({ mobile: mobile })
         if (mobileAlreadyUsed) {
-            return res.status(400).send({ status: false, msg: "Mobile Number already used" })
+            return res.status(409).send({ status: false, msg: "Mobile Number already used" })
         }
 
         if (!isValid(collegeName)) return res.status(400).send({ status: false, msg: " College Name is required" })

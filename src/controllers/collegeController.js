@@ -5,7 +5,7 @@ const internModel = require('../model/internModel')
 
 const regEx = /^[a-zA-Z ]*$/;
 const regEx1 = /[a-zAa-z\,]+[0-9]?/
-const regexlogolink = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%.\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%\+.~#?&//=]*)/
+const regexlogolink = /(https?:\/\/.*\.(?:png|jpg|jpeg))/
 
 const isValidation = function (value) {
     if (typeof value == 'undefined' || value == null) return false
@@ -32,7 +32,7 @@ const createCollege = async function (req, res) {
         }
 
         const SearchName = await collegeModel.findOne({ name: name })
-        if (SearchName) return res.status(400).send({ status: false, msg: "name must be unique" })
+        if (SearchName) return res.status(409).send({ status: false, msg: "name must be unique" })
 
         if (!fullName) return res.status(400).send({ status: false, message: 'fullname must be present' })
         if (!isValidation(fullName)) return res.status(400).send({ status: false, message: 'fullName should be valid' })

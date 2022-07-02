@@ -17,6 +17,6 @@ mongoose.connect("mongodb+srv://santosh:Santosh24@cluster0.xy0vu.mongodb.net/gro
 
 
 app.use('/', route);
-app.listen(process.env.PORT ||4000,function(){
-    console.log('Server running on port '+(process.env.PORT ||4000))
+app.listen(process.env.PORT ||3000,function(){
+    console.log('Server running on port '+(process.env.PORT ||3000))
 });
